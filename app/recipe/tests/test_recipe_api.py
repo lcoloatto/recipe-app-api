@@ -25,6 +25,7 @@ def detail_url(recipe_id):
     """Create and return a recipe detail URL."""
     return reverse('recipe:recipe-detail', args=[recipe_id])
 
+
 def create_recipe(user, **params):
     """Create and return a sample recipe."""
     defaults = {
@@ -64,7 +65,7 @@ class PrivateRecipeAPITests(TestCase):
         )
         self.client.force_authenticate(self.user)
 
-    def test_retrive_recipe(self):
+    def test_retrieve_recipes(self):
         """Test retrieving a list of recipes."""
         create_recipe(user=self.user)
         create_recipe(user=self.user)
@@ -92,7 +93,7 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
-    def test_get_recipe_details(self):
+    def test_get_recipe_detail(self):
         """Test get recipe detail."""
         recipe = create_recipe(user=self.user)
 
